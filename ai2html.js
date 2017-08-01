@@ -3009,7 +3009,7 @@ function generateOutputHtml(content, pageName, settings) {
   // process local preview template if appropriate
   if (settings.local_preview_template !== "") {
     // TODO: may have missed a condition, need to compare with original version
-    var previewFileDestination = htmlFileDestinationFolder + "index.html";
+    var previewFileDestination = htmlFileDestinationFolder + pageName + ".html";
     outputLocalPreviewPage(textForFile, previewFileDestination, settings);
   }
 }
