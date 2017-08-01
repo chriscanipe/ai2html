@@ -1,7 +1,8 @@
-// ai2html-legacy.js
-var scriptVersion     = "0.64.0";  // Increment the final digit after future updates
-var scriptEnvironment = "nyt";
-// var scriptEnvironment = "";
+// ai2html.js
+var scriptVersion     = "0.61";
+// var scriptEnvironment = "nyt";
+var scriptEnvironment = "";
+var axiosVersion = "0.1.2";
 
 // ai2html is a script for Adobe Illustrator that converts your Illustrator document into html and css.
 
@@ -358,11 +359,12 @@ var applyTemplate = function(template,atObject) {
 	var newText = template;
 	for (var atKey in atObject) {
 		var mustachePattern = new RegExp("\\{\\{\\{? *" + atKey + " *\\}\\}\\}?","g");
-		var ejsPattern      = new RegExp("\\<\\%[=]? *" + atKey + " *\\%\\>","g");
+		// var ejsPattern      = new RegExp("\\<\\%[=]? *" + atKey + " *\\%\\>","g");
 		var replacePattern  = atObject[atKey];
-		newText = newText.replace( mustachePattern , replacePattern );
-		newText = newText.replace( ejsPattern      , replacePattern );
+		newText = newText.replace( mustachePattern , function(match) { return atObject[atKey] });
+		// newText = newText.replace( ejsPattern      , replacePattern );
 	};
+   // alert("template " + template + "\rnewText " + newText)
 	return newText;
 };
 var outputHtml = function(htmlText,fileDestination) {
@@ -391,9 +393,9 @@ var checkForOutputFolder = function(folderPath, nickname) {
 	if (!outputFolder.exists) {
 		var outputFolderCreated = outputFolder.create();
 		if (outputFolderCreated) {
-			feedback.push("The " + nickname + " folder did not exist, so the folder was created.");
+			feedback.push("\rThe " + nickname + " folder did not exist, so the folder was created.");
 		} else {
-			warnings.push("The " + nickname + " folder did not exist and could not be created.");
+			warnings.push("\rThe " + nickname + " folder did not exist and could not be created.");
 		};
 	};
 };
@@ -496,7 +498,7 @@ if (scriptEnvironment=="nyt") {
         jpg_quality: {defaultValue: 60, includeInSettingsBlock: true, includeInConfigFile: false, useQuoteMarksInConfigFile: false, inputType: "integer", possibleValues: "0 to 100", notes: ""},
         center_html_output: {defaultValue: "true", includeInSettingsBlock: false, includeInConfigFile: false, useQuoteMarksInConfigFile: false, inputType: "text", possibleValues: "", notes: "Adds “margin:0 auto;” to the div containing the ai2html output."},
         use_2x_images_if_possible: {defaultValue: "yes", includeInSettingsBlock: false, includeInConfigFile: false, useQuoteMarksInConfigFile: false, inputType: "yesNo", possibleValues: "", notes: ""},
-        use_lazy_loader: {defaultValue: "no", includeInSettingsBlock: false, includeInConfigFile: false, useQuoteMarksInConfigFile: false, inputType: "yesNo", possibleValues: "", notes: ""},
+        use_lazy_loader: {defaultValue: "yes", includeInSettingsBlock: false, includeInConfigFile: false, useQuoteMarksInConfigFile: false, inputType: "yesNo", possibleValues: "", notes: ""},
         include_resizer_css_js: {defaultValue: "yes", includeInSettingsBlock: false, includeInConfigFile: false, useQuoteMarksInConfigFile: false, inputType: "yesNo", possibleValues: "", notes: ""},
         include_resizer_classes: {defaultValue: "no", includeInSettingsBlock: false, includeInConfigFile: false, useQuoteMarksInConfigFile: false, inputType: "yesNo", possibleValues: "", notes: ""},
         include_resizer_widths: {defaultValue: "yes", includeInSettingsBlock: false, includeInConfigFile: false, useQuoteMarksInConfigFile: false, inputType: "yesNo", possibleValues: "", notes: ""},
@@ -599,69 +601,19 @@ var fonts = [
 	{"aifont":"Georgia-Bold","family":"georgia,'times new roman',times,serif","weight":"bold","style":""},
 	{"aifont":"Georgia-Italic","family":"georgia,'times new roman',times,serif","weight":"","style":"italic"},
 	{"aifont":"Georgia-BoldItalic","family":"georgia,'times new roman',times,serif","weight":"bold","style":"italic"},
-	{"aifont":"NYTFranklin-Light","family":"nyt-franklin,arial,helvetica,sans-serif","weight":"300","style":""},
-	{"aifont":"NYTFranklin-Medium","family":"nyt-franklin,arial,helvetica,sans-serif","weight":"500","style":""},
-	{"aifont":"NYTFranklin-SemiBold","family":"nyt-franklin,arial,helvetica,sans-serif","weight":"600","style":""},
-	{"aifont":"NYTFranklin-Semibold","family":"nyt-franklin,arial,helvetica,sans-serif","weight":"600","style":""},
-	{"aifont":"NYTFranklinSemiBold-Regular","family":"nyt-franklin,arial,helvetica,sans-serif","weight":"600","style":""},
-	{"aifont":"NYTFranklin-SemiboldItalic","family":"nyt-franklin,arial,helvetica,sans-serif","weight":"600","style":"italic"},
-	{"aifont":"NYTFranklin-Bold","family":"nyt-franklin,arial,helvetica,sans-serif","weight":"700","style":""},
-	{"aifont":"NYTFranklin-LightItalic","family":"nyt-franklin,arial,helvetica,sans-serif","weight":"300","style":"italic"},
-	{"aifont":"NYTFranklin-MediumItalic","family":"nyt-franklin,arial,helvetica,sans-serif","weight":"500","style":"italic"},
-	{"aifont":"NYTFranklin-BoldItalic","family":"nyt-franklin,arial,helvetica,sans-serif","weight":"700","style":"italic"},
-	{"aifont":"NYTFranklin-ExtraBold","family":"nyt-franklin,arial,helvetica,sans-serif","weight":"800","style":""},
-	{"aifont":"NYTFranklin-ExtraBoldItalic","family":"nyt-franklin,arial,helvetica,sans-serif","weight":"800","style":"italic"},
-	{"aifont":"NYTFranklin-Headline","family":"nyt-franklin,arial,helvetica,sans-serif","weight":"bold","style":""},
-	{"aifont":"NYTFranklin-HeadlineItalic","family":"nyt-franklin,arial,helvetica,sans-serif","weight":"bold","style":"italic"},
-	{"aifont":"NYTCheltenham-ExtraLight","family":"nyt-cheltenham,georgia,'times new roman',times,serif","weight":"200","style":""},
-	{"aifont":"NYTCheltenhamExtLt-Regular","family":"nyt-cheltenham,georgia,'times new roman',times,serif","weight":"200","style":""},
-	{"aifont":"NYTCheltenham-Light","family":"nyt-cheltenham,georgia,'times new roman',times,serif","weight":"300","style":""},
-	{"aifont":"NYTCheltenhamLt-Regular","family":"nyt-cheltenham,georgia,'times new roman',times,serif","weight":"300","style":""},
-	{"aifont":"NYTCheltenham-LightSC","family":"nyt-cheltenham,georgia,'times new roman',times,serif","weight":"300","style":""},
-	{"aifont":"NYTCheltenham-Book","family":"nyt-cheltenham,georgia,'times new roman',times,serif","weight":"400","style":""},
-	{"aifont":"NYTCheltenhamBook-Regular","family":"nyt-cheltenham,georgia,'times new roman',times,serif","weight":"400","style":""},
-	{"aifont":"NYTCheltenham-Wide","family":"nyt-cheltenham,georgia,'times new roman',times,serif","weight":"","style":""},
-	{"aifont":"NYTCheltenhamMedium-Regular","family":"nyt-cheltenham,georgia,'times new roman',times,serif","weight":"500","style":""},
-	{"aifont":"NYTCheltenham-Medium","family":"nyt-cheltenham,georgia,'times new roman',times,serif","weight":"500","style":""},
-	{"aifont":"NYTCheltenham-Bold","family":"nyt-cheltenham,georgia,'times new roman',times,serif","weight":"700","style":""},
-	{"aifont":"NYTCheltenham-BoldCond","family":"nyt-cheltenham,georgia,'times new roman',times,serif","weight":"bold","style":""},
-	{"aifont":"NYTCheltenham-BoldExtraCond","family":"nyt-cheltenham,georgia,'times new roman',times,serif","weight":"bold","style":""},
-	{"aifont":"NYTCheltenham-ExtraBold","family":"nyt-cheltenham,georgia,'times new roman',times,serif","weight":"bold","style":""},
-	{"aifont":"NYTCheltenham-ExtraLightIt","family":"nyt-cheltenham,georgia,'times new roman',times,serif","weight":"","style":"italic"},
-	{"aifont":"NYTCheltenham-ExtraLightItal","family":"nyt-cheltenham,georgia,'times new roman',times,serif","weight":"","style":"italic"},
-	{"aifont":"NYTCheltenham-LightItalic","family":"nyt-cheltenham,georgia,'times new roman',times,serif","weight":"","style":"italic"},
-	{"aifont":"NYTCheltenham-BookItalic","family":"nyt-cheltenham,georgia,'times new roman',times,serif","weight":"","style":"italic"},
-	{"aifont":"NYTCheltenham-WideItalic","family":"nyt-cheltenham,georgia,'times new roman',times,serif","weight":"","style":"italic"},
-	{"aifont":"NYTCheltenham-MediumItalic","family":"nyt-cheltenham,georgia,'times new roman',times,serif","weight":"","style":"italic"},
-	{"aifont":"NYTCheltenham-BoldItalic","family":"nyt-cheltenham,georgia,'times new roman',times,serif","weight":"700","style":"italic"},
-	{"aifont":"NYTCheltenham-ExtraBoldItal","family":"nyt-cheltenham,georgia,'times new roman',times,serif","weight":"bold","style":"italic"},
-	{"aifont":"NYTCheltenham-ExtraBoldItalic","family":"nyt-cheltenham,georgia,'times new roman',times,serif","weight":"bold","style":"italic"},
-	{"aifont":"NYTCheltenhamSH-Regular","family":"nyt-cheltenham-sh,nyt-cheltenham,georgia,'times new roman',times,serif","weight":"400","style":""},
-	{"aifont":"NYTCheltenhamSH-Italic","family":"nyt-cheltenham-sh,nyt-cheltenham,georgia,'times new roman',times,serif","weight":"400","style":"italic"},
-	{"aifont":"NYTCheltenhamSH-Bold","family":"nyt-cheltenham-sh,nyt-cheltenham,georgia,'times new roman',times,serif","weight":"700","style":""},
-	{"aifont":"NYTCheltenhamSH-BoldItalic","family":"nyt-cheltenham-sh,nyt-cheltenham,georgia,'times new roman',times,serif","weight":"700","style":"italic"},
-	{"aifont":"NYTCheltenhamWide-Regular","family":"nyt-cheltenham,georgia,'times new roman',times,serif","weight":"500","style":""},
-	{"aifont":"NYTCheltenhamWide-Italic","family":"nyt-cheltenham,georgia,'times new roman',times,serif","weight":"500","style":"italic"},
-	{"aifont":"NYTKarnakText-Regular","family":"nyt-karnak-display-130124,georgia,'times new roman',times,serif","weight":"400","style":""},
-	{"aifont":"NYTKarnakDisplay-Regular","family":"nyt-karnak-display-130124,georgia,'times new roman',times,serif","weight":"400","style":""},
-	{"aifont":"NYTStymieLight-Regular","family":"nyt-stymie,arial,helvetica,sans-serif","weight":"300","style":""},
-	{"aifont":"NYTStymieMedium-Regular","family":"nyt-stymie,arial,helvetica,sans-serif","weight":"500","style":""},
-	{"aifont":"StymieNYT-Light","family":"nyt-stymie,arial,helvetica,sans-serif","weight":"300","style":""},
-	{"aifont":"StymieNYT-LightPhoenetic","family":"nyt-stymie,arial,helvetica,sans-serif","weight":"300","style":""},
-	{"aifont":"StymieNYT-Lightitalic","family":"nyt-stymie,arial,helvetica,sans-serif","weight":"300","style":"italic"},
-	{"aifont":"StymieNYT-Medium","family":"nyt-stymie,arial,helvetica,sans-serif","weight":"500","style":""},
-	{"aifont":"StymieNYT-MediumItalic","family":"nyt-stymie,arial,helvetica,sans-serif","weight":"500","style":"italic"},
-	{"aifont":"StymieNYT-Bold","family":"nyt-stymie,arial,helvetica,sans-serif","weight":"700","style":""},
-	{"aifont":"StymieNYT-BoldItalic","family":"nyt-stymie,arial,helvetica,sans-serif","weight":"700","style":"italic"},
-	{"aifont":"StymieNYT-ExtraBold","family":"nyt-stymie,arial,helvetica,sans-serif","weight":"700","style":""},
-	{"aifont":"StymieNYT-ExtraBoldText","family":"nyt-stymie,arial,helvetica,sans-serif","weight":"700","style":""},
-	{"aifont":"StymieNYT-ExtraBoldTextItal","family":"nyt-stymie,arial,helvetica,sans-serif","weight":"700","style":"italic"},
-	{"aifont":"StymieNYTBlack-Regular","family":"nyt-stymie,arial,helvetica,sans-serif","weight":"700","style":""},
-	{"aifont":"StymieBT-ExtraBold","family":"nyt-stymie,arial,helvetica,sans-serif","weight":"700","style":""},
-	{"aifont":"Stymie-Thin","family":"nyt-stymie,arial,helvetica,sans-serif","weight":"300","style":""},
-	{"aifont":"Stymie-UltraLight","family":"nyt-stymie,arial,helvetica,sans-serif","weight":"300","style":""},
-	{"aifont":"NYTMagSans-Regular","family":"'nyt-mag-sans',arial,helvetica,sans-serif","weight":"500","style":""},
-	{"aifont":"NYTMagSans-Bold","family":"'nyt-mag-sans',arial,helvetica,sans-serif","weight":"700","style":""}
+    {"aifont":"GorditaRegular","family":"'gordita',helvetica,helvetica-neue,arial,sans-serif","weight":"","style":""},
+    {"aifont":"GorditaItalic","family":"'gordita',helvetica,helvetica-neue,arial,sans-serif","weight":"","style":"italic"},
+    {"aifont":"GorditaMedium","family":"'gordita',helvetica,helvetica-neue,arial,sans-serif","weight":"500","style":""},
+    {"aifont":"GorditaMedium-Italic","family":"'gordita',helvetica,helvetica-neue,arial,sans-serif","weight":"500","style":"italic"},
+    {"aifont":"GorditaBold","family":"'gordita',helvetica,helvetica-neue,arial,sans-serif","weight":"600","style":""},
+    {"aifont":"GorditaBold-Italic","family":"'gordita',helvetica,helvetica-neue,arial,sans-serif","weight":"600","style":"italic"},
+    {"aifont":"AtizaText-Regular","family":"atizatext-regular,georgia,serif","weight":"","style":""},
+    {"aifont":"AtizaText-Italic","family":"atizatext-italic,georgia,serif","weight":"","style":"italic"},
+    {"aifont":"AtizaText-Bold","family":"atizatext-bold,georgia,serif","weight":"","style":""},
+    {"aifont":"LiberationMono","family":"liberationmono,monospace","weight":"","style":""},
+    {"aifont":"LiberationMono-Italic","family":"liberation_monoitalic,monospace","weight":"","style":"italic"},
+    {"aifont":"LiberationMono-Bold","family":"liberation_monobold,monospace","weight":"","style":""},
+    {"aifont":"LiberationMono-BoldItalic","family":"liberation_monobolditalic,monospace","weight":"","style":"italic"}
 ];
 
 var caps = [
@@ -706,8 +658,8 @@ var currMin       = zeroPad(d.getMinutes(),2);
 var dateTimeStamp = currYear + "-" + currMonth + "-" + currDate + " - " + currHour + ":" + currMin;
 
 // user inputs, settings, etc
-var defaultFamily       = "nyt-franklin,arial,helvetica,sans-serif";
-var defaultWeight       = "";
+var defaultFamily       = "gordita,helvetica-neue,helvetica,arial,sans-serif";
+var defaultWeight       = "400";
 var defaultStyle        = "";
 var defaultSize         = 13;
 var defaultLeading      = 18;
@@ -739,7 +691,7 @@ var aiFileInPreviewProject = false;
 var doc                    = app.activeDocument;
 var docPath                = doc.path + "/";
 // var origFilename           = doc.name;
-
+var filename               = doc.name.replace(/(.+)\.[aieps]+$/,"$1").replace(/ /g,"-");
 var origFile               = new File (docPath + doc.name);
 var parentFolder           = docPath.toString().match( /[^\/]+\/$/ );
 var publicFolder           = new Folder( docPath + "../public/" );
@@ -780,29 +732,6 @@ unlockStuff(doc);
 for (var i = hiddenObjects.length-1; i>=0; i--) {
 	hiddenObjects[i].visible = false;
 };
-
-// ================================================
-// read .git/config file to get preview slug
-// ================================================
-
-
-if ( gitConfigFile.exists && scriptEnvironment=="nyt" ) {
-	gitConfigFile.open("r");
-	while(!gitConfigFile.eof) {
-		var line      = gitConfigFile.readln();
-		var lineArray = line.split("=");
-		if (lineArray.length>1) {
-			var gitConfigKey    = lineArray[0].replace( /^\s+/ , "" ).replace( /\s+$/ , "" );
-			var gitConfigValue  = lineArray[1].replace( /^\s+/ , "" ).replace( /\s+$/ , "" );
-			if ( gitConfigKey=="url" ) {
-				docSettings.preview_slug = gitConfigValue.replace( /^[^:]+:/ , "" ).replace( /\.git$/ , "");
-				// feedback.push("preview slug = " + docSettings.preview_slug);
-			};
-		};
-	};
-	gitConfigFile.close();
-};
-
 
 // ================================================
 // read yml file if it exists to determine what type of project this is
@@ -850,7 +779,7 @@ for (setting in ai2htmlBaseSettings) {
 	docSettings[setting] = ai2htmlBaseSettings[setting].defaultValue;
 };
 
-if (docSettings.project_name == "") {
+if (docSettings.project_name == "" || !docSettings.project_name) {
 	docSettings.project_name = doc.name.replace(/(.+)\.[aieps]+$/,"$1").replace(/ /g,"-");
 } else {
 	docSettings.project_name = makeKeyword(docSettings.project_name);
@@ -1954,7 +1883,7 @@ if (doc.documentColorSpace!="DocumentColorSpace.RGB") {
 				};
 			};
 
-			var imageDestinationFolder = docPath + docSettings.html_output_path + docSettings.image_output_path;
+			var imageDestinationFolder = docPath + parentFolder + docSettings.image_output_path;
 			checkForOutputFolder(imageDestinationFolder, "image_output_path");
 			var imageDestination = imageDestinationFolder + docArtboardName;
 			// alert ("imageDestination\n" +
@@ -2042,19 +1971,19 @@ if (doc.documentColorSpace!="DocumentColorSpace.RGB") {
 				textForFile  = applyTemplate(textForFile,docSettings);
 				// textForFile  = straightenCurlyQuotesInsideAngleBrackets(textForFile);
 
-				htmlFileDestinationFolder = docPath + docSettings.html_output_path;
+				htmlFileDestinationFolder = docPath + parentFolder;
 				checkForOutputFolder(htmlFileDestinationFolder, "html_output_path");
 				htmlFileDestination = htmlFileDestinationFolder + docArtboardName + docSettings.html_output_extension;
 				if (docSettings.local_preview_template!="") {
 					pBar.setTitle(docArtboardName + ': Writing HTML file...');
 
-					docSettings.ai2htmlPartial     = textForFile;
-					var localPreviewDestination = htmlFileDestinationFolder + docArtboardName + ".preview.html";
+					docSettings.ai2htmlPartial  = textForFile;
+					var localPreviewDestination = htmlFileDestinationFolder + docArtboardName + ".html";
 					var localPreviewHtml        = applyTemplate(localPreviewTemplateText,docSettings)
 					outputHtml(localPreviewHtml,localPreviewDestination);
 				};
 
-				outputHtml(textForFile,htmlFileDestination);
+				// outputHtml(textForFile,htmlFileDestination);
 				// var responsiveHtmlScoopFile = new File( htmlFileDestination );
 				// responsiveHtmlScoopFile.open( "w", "TEXT", "TEXT" );
 				// 	responsiveHtmlScoopFile.lineFeed = "Unix";
@@ -2138,7 +2067,7 @@ if (doc.documentColorSpace!="DocumentColorSpace.RGB") {
 		textForFile  = applyTemplate(textForFile,docSettings);
 		// textForFile  = straightenCurlyQuotesInsideAngleBrackets(textForFile);
 
-		htmlFileDestinationFolder = docPath + docSettings.html_output_path;
+		htmlFileDestinationFolder = docPath + parentFolder;
 		checkForOutputFolder(htmlFileDestinationFolder, "html_output_path");
 		if (previewProjectType=="ai2html") {
 			htmlFileDestination     = htmlFileDestinationFolder + "index" + docSettings.html_output_extension;
@@ -2150,13 +2079,13 @@ if (doc.documentColorSpace!="DocumentColorSpace.RGB") {
 				pBar.setTitle('Writing HTML file...');
 
 				docSettings.ai2htmlPartial = textForFile;
-				var localPreviewDestination = htmlFileDestinationFolder + docSettings.project_name + ".preview.html";
+				var localPreviewDestination = htmlFileDestinationFolder + docSettings.project_name + ".html";
 				var localPreviewHtml = applyTemplate(localPreviewTemplateText,docSettings)
 				outputHtml(localPreviewHtml,localPreviewDestination);
 			};
 		};
 
-		outputHtml(textForFile,htmlFileDestination);
+		// outputHtml(textForFile,htmlFileDestination);
 		// var responsiveHtmlScoopFile = new File( htmlFileDestination );
 		// responsiveHtmlScoopFile.open( "w", "TEXT", "TEXT" );
 		// 	responsiveHtmlScoopFile.lineFeed = "Unix";
@@ -2225,7 +2154,7 @@ if (parentFolder !== null) {
 	saveOptions.pdfCompatible = false;
 	// if (!doc.saved) { doc.save() };
 	if (!doc.saved) { doc.saveAs( origFile , saveOptions ) };
-	feedback.push("Your Illustrator file was saved.")
+	feedback.push("\rYour Illustrator file was saved.")
 }
 
 // ==============================
@@ -2250,7 +2179,7 @@ if (errors.length == 1) {
 };
 if (errors.length > 0) {
 	for (var e = 0; e < errors.length; e++) {
-		alertText += "• " + errors[e] + "\r";
+		alertText += errors[e] + "\r";
 	};
 };
 if (warnings.length == 1) {
@@ -2260,13 +2189,13 @@ if (warnings.length == 1) {
 };
 if (warnings.length > 0) {
 	for (var w = 0; w < warnings.length; w++) {
-		alertText += "• " + warnings[w] + "\r";
+		alertText += warnings[w] + "\r";
 	};
 };
 if (feedback.length > 0) {
 	alertText += "\rInformation\r================\r";
 	for (var f = 0; f < feedback.length; f++) {
-		alertText += "• " + feedback[f] + "\r";
+		alertText += feedback[f] + "\r";
 	};
 };
 
@@ -2305,24 +2234,6 @@ function getResizerScript() {
 	resizerScript += "\n" + "                    el.style.display = \"none\";";
 	resizerScript += "\n" + "                }";
 	resizerScript += "\n" + "            });";
-
-
-	if (scriptEnvironment=="nyt") {
-		resizerScript += "\n" + "            try {";
-		resizerScript += "\n" + "                if (window.parent && window.parent.$) {";
-		resizerScript += "\n" + "                    window.parent.$(\"body\").trigger(\"resizedcontent\", [window]);";
-		resizerScript += "\n" + "                }";
-		resizerScript += "\n" + "                document.documentElement.dispatchEvent(new Event('resizedcontent'));";
-		resizerScript += "\n" + "                if (window.require && document.querySelector('meta[name=sourceApp]') && document.querySelector('meta[name=sourceApp]').content == 'nyt-v5') {";
-		resizerScript += "\n" + "                    require(['foundation\/main'], function() {";
-		resizerScript += "\n" + "                        require(['shared\/interactive\/instances\/app-communicator'], function(AppCommunicator) {";
-		resizerScript += "\n" + "                            AppCommunicator.triggerResize();";
-		resizerScript += "\n" + "                        });";
-		resizerScript += "\n" + "                    });";
-		resizerScript += "\n" + "                }";
-		resizerScript += "\n" + "            } catch(e) { console.log(e); }";
-	}
-
 	resizerScript += "\n" + "        }";
 	resizerScript += "\n" + "";
 	resizerScript += "\n" + "        resizer();";
