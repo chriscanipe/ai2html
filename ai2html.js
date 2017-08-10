@@ -176,15 +176,7 @@ var htmlCharacterCodes = [["\xA0","&nbsp;"], ["\xA1","&iexcl;"], ["\xA2","&cent;
   // Make a copy of the spreadsheet for yourself.
   // Modify the settings to taste.
 var fonts = [
-  {"aifont":"ArialMT","family":"arial,helvetica,sans-serif","weight":"","style":""},
-  {"aifont":"Arial-BoldMT","family":"arial,helvetica,sans-serif","weight":"bold","style":""},
-  {"aifont":"Arial-ItalicMT","family":"arial,helvetica,sans-serif","weight":"","style":"italic"},
-  {"aifont":"Arial-BoldItalicMT","family":"arial,helvetica,sans-serif","weight":"bold","style":"italic"},
-  {"aifont":"Georgia","family":"georgia,'times new roman',times,serif","weight":"","style":""},
-  {"aifont":"Georgia-Bold","family":"georgia,'times new roman',times,serif","weight":"bold","style":""},
-  {"aifont":"Georgia-Italic","family":"georgia,'times new roman',times,serif","weight":"","style":"italic"},
-  {"aifont":"Georgia-BoldItalic","family":"georgia,'times new roman',times,serif","weight":"bold","style":"italic"},
-  {"aifont":"GorditaRegular","family":"'gordita',helvetica,helvetica-neue,arial,sans-serif","weight":"","style":""},
+  {"aifont":"GorditaRegular","family":"'gordita',helvetica,helvetica-neue,arial,sans-serif","weight":"normal","style":""},
   {"aifont":"GorditaItalic","family":"'gordita',helvetica,helvetica-neue,arial,sans-serif","weight":"","style":"italic"},
   {"aifont":"GorditaMedium","family":"'gordita',helvetica,helvetica-neue,arial,sans-serif","weight":"500","style":""},
   {"aifont":"GorditaMedium-Italic","family":"'gordita',helvetica,helvetica-neue,arial,sans-serif","weight":"500","style":"italic"},
