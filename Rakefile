@@ -13,6 +13,7 @@ task :install do
       cp "ai2html-legacy.js", "#{install_dir}/ai2html_v1.jsx"
       cp "ai2html.js", "#{install_dir}/ai2html_v2.jsx"
       cp "utilities/aifontname.js", "#{install_dir}/aifontname.jsx"
+      cp "utilities/export-fallback-images.js", "#{install_dir}/export-fallback-images.jsx"
     else
       puts "Does not exist."
     end
