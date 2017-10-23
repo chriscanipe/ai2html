@@ -1,18 +1,19 @@
-Subject line: Graphic for {{ SUBJECT }}
+Subject line: Graphic showing {{ DESCRIPTION }}
 
-This goes with a {{ AUTHOR }} post.
+This goes with {{ WHAT }}
 
 ai2html embed code
 
 In the CMS, switch to the code view and put these two lines of code where you want the graphic to appear -> 
 
-[shortcode-pym-iframe id="ID" url="URL"]
-<small class="image-media media-photo-credit">Data: {{ SOURCE }}; Chart: {{ AUTHOR }} / Axios</small>
+[shortcode-pym-iframe id="{{ SLUG }}" url="{{ HTML_URL }}" fallback-image="{{ APPLE_URL }}"]
+<small class="image-media">Data: {{ SOURCE }}; Chart: {{ AUTHOR }} / Axios</small>
 
 Image fallback
 
-You can link to this images for fallbacks in newsletters and other formats that can't accept html.
+You can link to this image as a fallback in newsletters and other formats that can't accept the shortcode.
 
-Link -> {{ FALLBACK_URL }}
+Link -> {{ IMAGE_URL }}
 
 Image credit should read -> Data: {{ SOURCE }}; Chart: {{ AUTHOR }} / Axios
+
