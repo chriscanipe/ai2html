@@ -1,11 +1,16 @@
 ﻿var doc = app.activeDocument;
 
 var pathComponents = doc.fullName.toString().split('/');
-var slug = pathComponents.pop().split('.')[0];
-var exportPath = pathComponents.join('/') + '/' + slug + '/fallbacks/' + slug;
-
-var fallbackURL = new File( exportPath + '-fallback' );
-var appleURL = new File( exportPath + '-apple' );
+pathComponents.pop();
+var slug = pathComponents[pathComponents.length - 1];
+var checkForOutputFolder = function(folderPath) {
+	var outputFolder = new Folder( folderPath );
+    if (!outputFolder.exists) outputFolder.create();
+}
+var exportPath = pathComponents.join('/')+'/'+slug+'/fallbacks/';
+checkForOutputFolder(exportPath)
+var fallbackURL = new File(exportPath+'/'+slug+'-fallback');
+var appleURL = new File(exportPath+'/'+slug+'-apple');
 
 var exportOptions = new ExportOptionsPNG24();
 exportOptions.horizontalScale = 300;
