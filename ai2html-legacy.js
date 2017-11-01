@@ -382,9 +382,10 @@ var outputFallbacks = function() {
 
 	var pathComponents = doc.fullName.toString().split('/');
 	var slug = pathComponents.pop().split('.')[0];
-
-	var fallbackURL = new File(pathComponents.join('/') + '/' + slug + '/' + slug + '-fallback');
-	var appleURL = new File(pathComponents.join('/') + '/' + slug + '/' + slug + '-apple');
+	var fallbacksDestinationFolder = docPath + parentFolder + 'fallbacks/';
+	checkForOutputFolder(fallbacksDestinationFolder, "fallback_output_path");
+	var fallbackPath = new File(pathComponents.join('/') + '/' + slug + '/fallbacks/' + slug + '-fallback');
+	var applePath = new File(pathComponents.join('/') + '/' + slug + '/fallbacks/' + slug + '-apple');
 
 	var exportOptions = new ExportOptionsPNG24();
 	exportOptions.horizontalScale = 300;
@@ -393,7 +394,7 @@ var outputFallbacks = function() {
 	exportOptions.transparency = false;
 	var type = ExportType.PNG24;
 
-	$.writeln(fallbackURL, appleURL)
+	$.writeln(fallbackPath, applePath)
 
 	var artboards = doc.artboards;
 
@@ -418,12 +419,12 @@ var outputFallbacks = function() {
 
 		if (abname === 'tablet:375') {
 			artboards.setActiveArtboardIndex(i)
-			process(artboards[i], fallbackURL)
+			process(artboards[i], fallbackPath)
 
 		}
 		if (abname === 'mobile-large:336') {
 			artboards.setActiveArtboardIndex(i)
-			process(artboards[i], appleURL)
+			process(artboards[i], applePath)
 		}
 	}
 };
