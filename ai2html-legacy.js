@@ -374,7 +374,61 @@ var outputHtml = function(htmlText,fileDestination) {
 		htmlFile.encoding = "UTF-8";
 		htmlFile.writeln(htmlText);
 	htmlFile.close;
+	outputFallbacks();
 };
+
+var outputFallbacks = function() {
+	var doc = app.activeDocument;
+
+	var pathComponents = doc.fullName.toString().split('/');
+	var slug = pathComponents.pop().split('.')[0];
+	var fallbacksDestinationFolder = docPath + parentFolder + 'fallbacks/';
+	checkForOutputFolder(fallbacksDestinationFolder, "fallback_output_path");
+	var fallbackPath = new File(pathComponents.join('/') + '/' + slug + '/fallbacks/' + slug + '-fallback');
+	var applePath = new File(pathComponents.join('/') + '/' + slug + '/fallbacks/' + slug + '-apple');
+
+	var exportOptions = new ExportOptionsPNG24();
+	exportOptions.horizontalScale = 300;
+	exportOptions.verticalScale = 300;
+	exportOptions.artBoardClipping = true;
+	exportOptions.transparency = false;
+	var type = ExportType.PNG24;
+
+	$.writeln(fallbackPath, applePath)
+
+	var artboards = doc.artboards;
+
+	var process = function (ab, file) {
+
+		var original = ab.artboardRect;
+
+		var newRect = [
+			original[0] - 20,
+			original[1],
+			original[2] + 20,
+			original[3]
+		]
+
+		ab.artboardRect = newRect
+		doc.exportFile(file, type, exportOptions);
+		ab.artboardRect = original
+	}
+
+	for (var i = 0; i < artboards.length; i++) {
+		var abname = artboards[i].name
+
+		if (abname === 'tablet:375') {
+			artboards.setActiveArtboardIndex(i)
+			process(artboards[i], fallbackPath)
+
+		}
+		if (abname === 'mobile-large:336') {
+			artboards.setActiveArtboardIndex(i)
+			process(artboards[i], applePath)
+		}
+	}
+};
+
 var readTextFileAndPutIntoAVariable = function(inputFile,starterText,linePrefix,lineSuffix) {
 	var outputText = starterText;
 	if ( inputFile.exists ) {
@@ -2077,10 +2131,10 @@ if (doc.documentColorSpace!="DocumentColorSpace.RGB") {
 				// var localPreviewTemplateFile = new File(docPath + docSettings.local_preview_template);
 				// var localPreviewTemplateText = readTextFileAndPutIntoAVariable(localPreviewTemplateFile,"","","");
 				pBar.setTitle('Writing HTML file...');
-
+				// Publish happens here!
 				docSettings.ai2htmlPartial = textForFile;
 				var localPreviewDestination = htmlFileDestinationFolder + docSettings.project_name + ".html";
-				var localPreviewHtml = applyTemplate(localPreviewTemplateText,docSettings)
+				var localPreviewHtml = applyTemplate(localPreviewTemplateText,docSettings);
 				outputHtml(localPreviewHtml,localPreviewDestination);
 			};
 		};
