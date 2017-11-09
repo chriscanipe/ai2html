@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>Axios Visuals: {{ project_name }}</title>
-	<!--[if lt IE 9]>
-	  <script type="text/javascript" charset="utf-8" src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
-	<meta property="fullbleed" content="false" />
+  <meta charset="utf-8">
+  <title>Axios Visuals: {{ project_name }}</title>
+  <!--[if lt IE 9]>
+    <script type="text/javascript" charset="utf-8" src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta property="fullbleed" content="false" />
   <meta property="slug" content="{{ project_name }}" />
   <meta property="apple-fallback" content="fallbacks/{{ project_name }}-apple.png" />
   <meta property="newsletter-fallback" content="fallbacks/{{ project_name }}-fallback.png" />
-	<link rel="stylesheet" href="//static.axios.com/css/reset.css" media="screen">
-	<link rel="stylesheet" href="//static.axios.com/css/axios.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-	<style>
+  <link rel="stylesheet" href="//static.axios.com/css/reset.css" media="screen">
+  <link rel="stylesheet" href="//static.axios.com/css/axios.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+  <style>
     @font-face {
       font-family: 'liberationmono';
       src: url('https://static.axios.com/fonts/liberationmono-regular-webfont.eot');
@@ -45,20 +45,20 @@
       color: #FFF;
       text-shadow: none;
     }
-	</style>
+  </style>
 </head>
 <body>
-	<div class="tmpl-ai2htmlPage">
-		<div class="g-graphicStub">
-			{{ ai2htmlPartial }}
-		</div>
-	</div>
-	<script type="text/javascript" src="https://pym.nprapps.org/pym.v1.min.js"></script>
-	<script type="text/javascript">
-		window.onload = function() {
-			var pymChild = new pym.Child({ polling: 500 });
-			pymChild.sendHeight();
-		}
-	</script>
+  <div class="tmpl-ai2htmlPage">
+    <div class="g-graphicStub">
+      {{ ai2htmlPartial }}
+    </div>
+  </div>
+  <script type="text/javascript" src="https://pym.nprapps.org/pym.v1.min.js"></script>
+  <script type="text/javascript">
+    window.onload = function() {
+      var pymChild = new pym.Child({ polling: 500 });
+      pymChild.sendHeight();
+    }
+  </script>
 </body>
 </html>
