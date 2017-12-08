@@ -2,18 +2,24 @@ Subject line: Graphic showing {{ DESCRIPTION }}
 
 This goes with {{ WHAT }}
 
-ai2html embed code
+Embedding in Eden
 
-In the CMS, switch to the code view and put these two lines of code where you want the graphic to appear -> 
+In the CMS, hit the embed button and input this url where you want the graphic to appear -> 
 
-[shortcode-pym-iframe id="{{ SLUG }}" url="{{ HTML_URL }}" fallback-image="{{ APPLE_URL }}"]
-<small class="image-media">Data: {{ SOURCE }}; Chart: {{ AUTHOR }} / Axios</small>
+{{ HTML_URL }}
+
+Image credit
+
+It should read -> Data: {{ SOURCE }}; Chart: {{ AUTHOR }} / Axios
 
 Image fallback
 
 You can link to this image as a fallback in newsletters and other formats that can't accept the shortcode.
 
-Link -> {{ IMAGE_URL }}
+Link -> {{ FALLBACK_IMAGE_URL }}
 
-Image credit should read -> Data: {{ SOURCE }}; Chart: {{ AUTHOR }} / Axios
+Social Image
 
+You drop this into the social image slot so it appears in social
+
+Link -> {{ SOCIAL_IMAGE_URL }}
