@@ -386,6 +386,7 @@ var outputFallbacks = function() {
 	checkForOutputFolder(fallbacksDestinationFolder, "fallback_output_path");
 	var fallbackPath = new File(pathComponents.join('/') + '/' + slug + '/fallbacks/' + slug + '-fallback');
 	var applePath = new File(pathComponents.join('/') + '/' + slug + '/fallbacks/' + slug + '-apple');
+	var socialPath = new File(pathComponents.join('/') + '/' + slug + '/fallbacks/' + slug + '-social');
 
 	var exportOptions = new ExportOptionsPNG24();
 	exportOptions.horizontalScale = 300;
@@ -398,7 +399,7 @@ var outputFallbacks = function() {
 
 	var artboards = doc.artboards;
 
-	var process = function (ab, file) {
+	var process = function (ab, file, addPadding) {
 
 		var original = ab.artboardRect;
 
@@ -409,7 +410,10 @@ var outputFallbacks = function() {
 			original[3]
 		]
 
-		ab.artboardRect = newRect
+		if (addPadding === true) {
+			ab.artboardRect = newRect
+		}
+
 		doc.exportFile(file, type, exportOptions);
 		ab.artboardRect = original
 	}
@@ -417,14 +421,18 @@ var outputFallbacks = function() {
 	for (var i = 0; i < artboards.length; i++) {
 		var abname = artboards[i].name
 
-		if (abname === 'tablet:375') {
+		if (abname === 'tablet:574') {
 			artboards.setActiveArtboardIndex(i)
-			process(artboards[i], fallbackPath)
+			process(artboards[i], fallbackPath, true)
 
 		}
 		if (abname === 'mobile-large:336') {
 			artboards.setActiveArtboardIndex(i)
-			process(artboards[i], applePath)
+			process(artboards[i], applePath, true)
+		}
+		if (abname === '-social') {
+			artboards.setActiveArtboardIndex(i)
+			process(artboards[i], socialPath, false)
 		}
 	}
 };
