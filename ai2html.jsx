@@ -404,9 +404,9 @@ var outputFallbacks = function() {
 		var original = ab.artboardRect;
 
 		var newRect = [
-			original[0] - 20,
+			original[0],
 			original[1],
-			original[2] + 20,
+			original[2],
 			original[3]
 		]
 
