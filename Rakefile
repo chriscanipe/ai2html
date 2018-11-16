@@ -1,6 +1,6 @@
 require 'fileutils'
 
-DIRS = [ 'Adobe Illustrator CC 2018' ]
+DIRS = [ 'Adobe Illustrator CC 2018', 'Adobe Illustrator CC 2019' ]
 
 task :install do
   DIRS.each do |dir|

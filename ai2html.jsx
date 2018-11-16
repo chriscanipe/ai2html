@@ -417,7 +417,7 @@ var outputFallbacks = function() {
 	for (var i = 0; i < artboards.length; i++) {
 		var abname = artboards[i].name
 
-		if (abname === 'tablet:375') {
+		if (abname === 'tablet:574') {
 			artboards.setActiveArtboardIndex(i)
 			process(artboards[i], fallbackPath)
 
