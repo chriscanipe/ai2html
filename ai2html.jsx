@@ -405,9 +405,9 @@ var outputFallbacks = function() {
 
 		var newRect = [
 			original[0] - 20,
-			original[1],
+			original[1] + 20,
 			original[2] + 20,
-			original[3]
+			original[3] - 20
 		]
 
 		if (addPadding === true) {
