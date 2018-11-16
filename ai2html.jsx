@@ -404,9 +404,9 @@ var outputFallbacks = function() {
 		var original = ab.artboardRect;
 
 		var newRect = [
-			original[0],
+			original[0] - 20,
 			original[1],
-			original[2],
+			original[2] + 20,
 			original[3]
 		]
 
@@ -423,7 +423,7 @@ var outputFallbacks = function() {
 
 		if (abname === 'tablet:574') {
 			artboards.setActiveArtboardIndex(i)
-			process(artboards[i], fallbackPath, true)
+			process(artboards[i], fallbackPath, false)
 
 		}
 		if (abname === 'mobile-large:336') {
