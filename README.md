@@ -1,4 +1,4 @@
-# ai2html for Mizzou students
+# ai2html for Mizzou
 
 This is a fork of the open-sourced Axios ai2html instance found [here](https://github.com/axioscode/ai2html)
 
