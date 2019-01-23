@@ -10,9 +10,7 @@ This `slug.ai` template is exactly the same as the one we use at Axios with a fe
 
 I've added the Missouri graphics color palette and style references to the `slug.ai` file as well.
 
-### Note:
-
-There are a lot of files in this directory. You really only need to worry about two of them: `ai2html_como_v1.js` and the `/yyyy-mm-dd` directory.
+_Note:_ There are a lot of files in this directory. You really only need to worry about two of them: `ai2html_como_v1.js` and the `/yyyy-mm-dd` directory.
 
 ### How to install ai2html
 
