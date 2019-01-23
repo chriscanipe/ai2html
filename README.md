@@ -1,7 +1,14 @@
+### ai2html for Mizzou students
+
 This is a fork of the open-sourced Axios ai2html instance found [here](https://github.com/axioscode/ai2html)
 
 And that is a fork of the original NYTimes instance found [here](http://ai2html.org)
 
+## What's unique about it
+
+This `slug.ai` template is exactly the same as the one we use at Axios with a few changes. It uses the same Google web font used on the Missourian site ([Source Sans Pro](https://fonts.google.com/specimen/Source+Sans+Pro?selection.family=Source+Sans+Pro)). The Missourian graphics template uses Franklin Gothic. They're fairly similar.
+
+I've added the Missouri graphics color palette and style references to the `slug.ai` file as well.
 
 ### How to install ai2html
 
