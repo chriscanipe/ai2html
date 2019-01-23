@@ -1,28 +1,29 @@
-# [ai2html](http://ai2html.org)
+This is a fork of the open-sourced Axios ai2html instance found [here](https://github.com/axioscode/ai2html)
 
-> ai2html is an open-source script for Adobe Illustrator that converts your Illustrator documents into html and css.
-
-Here are [examples of how we’ve used the script](https://del.icio.us/archietse/ai2html,nyt) at The New York Times and [examples of how others](https://del.icio.us/archietse/ai2html,others) have used it. Share your ai2html projects on Twitter, Delicious, etc. using #ai2html.
-
-For documentation and examples on [how to use ai2html](http://ai2html.org), please visit [ai2html.org](http://ai2html.org).
+And that is a fork of the original NYTimes instance found [here](http://ai2html.org)
 
 
-## Contributing to this project
+### How to install ai2html
 
-The Github repository for this site is available at [newsdev/ai2html](https://github.com/newsdev/ai2html).
+1. Move the `ai2html_como_v1.js` file into the Illustrator folder where scripts are located.
+For example, on Mac OS X running Adobe Illustrator CC 2017, the path would be:
+```Applications⁩/Adobe Illustrator CC 2017⁩/Presets⁩/en_US⁩/Scripts/ai2html_como_v1.js```
 
+2. Close and restart Illustrator.
 
-## Thanks
+### How to use ai2html
 
-Many thanks to [Gregor Aisch](https://twitter.com/driven_by_data), [Derek Watkins](https://twitter.com/dwtkns), [Josh Katz](https://twitter.com/jshkatz), [K.K. Rebecca Lai](https://twitter.com/kkrebeccalai), [Tom Giratikanon](https://twitter.com/giratikanon), [Matt Ericson](https://twitter.com/mericson), [Jeremy Ashkenas](https://twitter.com/jashkenas) and [Alan McLean](https://twitter.com/alanmclean) for their incredible contributions to this project, as well as to my colleagues in The New York Times [Graphics Department](https://twitter.com/nytgraphics) for their patient guidance.
+1. Create your Illustrator artwork using the project template folder `yyyy-mm-dd-slug` 
 
-If you’re learning to write Javascript for Adobe Illustrator, [John Wundes](http://www.wundes.com/JS4AI/), has many wonderful scripts. [explore.js](http://www.wundes.com/JS4AI/explore.js) is particularly helpful for understanding what attributes are attached to Illustrator objects.
+2. Change the name of the directory. For example: `2019-01-21-traffic-accidents`
 
----
+3. Change the name of the `slug.ai` file to the slug as well. For example: `2019-01-21-traffic-accidents.ai`
 
-<p style="font-size:.8em;opacity:0.5;">Created by <a href="https://twitter.com/archietse">Archie Tse</a> / <a href="https://github.com/newsdev">The New York Times</a></p>
+4. Create your Illustrator artowork in the ai file. I like to start with the "Mobile Large" artboard, because that's the one our audience is most likely to see. If it works on people's phones, it will be easy to size up for a desktop view as well.
 
-<p style="font-size:.8em;opacity:0.7;">Copyright (c) 2011-2015 The New York Times Company</p>
+5. When you're done with one size, cut and paste it into each of the artboards and adjust the layout and labeling as necessary. The goal is to make sure the chart looks good at all sizes.
 
+6. When that's all set, run the script by choosing: `File > Scripts > ai2html_como_v1`
+Go to the folder containing your Illustrator file. Inside will be a folder called `2019-01-21-traffic-accidents` (or whatever your slug name is).
 
-
+Open the html files in your browser to preview your output.
