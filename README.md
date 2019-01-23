@@ -35,3 +35,6 @@ For example, on Mac OS X running Adobe Illustrator CC 2017, the path would be:
 6. When that's all set, run the script by choosing: `File > Scripts > ai2html_como_v1` in Illustrator. Then, go to the folder containing your Illustrator file. Inside will be a folder called `2019-01-21-traffic-accidents` (or whatever your slug name is).
 
 7. Open the html file (ex: `2019-01-21-traffic-accidents.html`) in your browser to preview your output.
+
+#### Sample project
+Check out the `Sample Project` directory to see a working Illustrator example and output directory.
